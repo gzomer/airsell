@@ -1,4 +1,7 @@
 export default `
+	ul {
+		list-style: none;
+	}
 	ol {
 		list-style: none;
 		counter-reset: apikey;
@@ -9,7 +12,7 @@ export default `
 	}
 	li:before {
 		float: left;
-	    margin-top: 4px;
+	    margin-top: 0px;
 	    margin-right: 10px;
 		content: counter(apikey);
 		background: #1183d9;
@@ -18,5 +21,9 @@ export default `
 		width: 1.2em;
 		text-align: center;
 		display: inline-block;
+	}
+
+	.askKey li:before {
+		margin-top: 4px;
 	}
 `;
