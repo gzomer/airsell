@@ -21,9 +21,9 @@ class Footer extends Component {
 	render() {
 		return (
 			<div className="footer">
-				<Button disabled={!this.state.canEdit} className="prevButton" onClick={this.props.onNextClick}> Edit </Button>
+				<Button disabled={!this.props.canEdit} className="prevButton" onClick={this.props.onNextClick}> Edit </Button>
 				<Button
-						disabled={!this.props.validState || this.props.publishing || !this.state.canEdit}
+						disabled={!this.props.validState || this.props.publishing || !this.props.canEdit}
 						className="publishButton"
 						variant="primary"
 						onClick={this.props.onPublishClick}>
@@ -79,6 +79,7 @@ class Home extends Component {
 					<Text textColor="light" alignContent="center">Don't forget to click Publish when you finish editing</Text>
 				</div>
 				<Footer
+					canEdit={this.state.canEdit}
 					footerConfig={this.props.footerConfig}
 					publishing={this.props.publishing}
 					onPublishClick={this.props.onPublishClick}
