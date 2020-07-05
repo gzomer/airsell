@@ -121,7 +121,6 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		//globalConfig.setAsync('ecommercePublished', false)
 		this.updateWizard()
 	}
 

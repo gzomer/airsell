@@ -208,6 +208,12 @@ class Wizard extends Component {
 		})
 	}
 
+	setErrorDialogOpen(value) {
+		this.setState({
+			isErrorDialogOpen : value
+		})
+	}
+
 	async onPublishClick() {
 		await this.publish()
 	}
@@ -217,7 +223,9 @@ class Wizard extends Component {
 			return
 		}
 		this.setState({
-			'publishing' : true
+			'publishing' : true,
+			isErrorDialogOpen: false,
+			errorMessage: ''
 		})
 
 		let allData = await this.fetchData.fetchAll(this.state.tablesConfig)
@@ -253,6 +261,15 @@ class Wizard extends Component {
 		}
 		let result = await this.api.publish(ecommerce)
 
+		if (!result.success) {
+			this.setState({
+				isErrorDialogOpen: true,
+				publishing: false,
+				errorMessage: result.message
+			})
+			return
+		}
+
 		if (result.apiKey) {
 			await globalConfig.setAsync(ECOMMERCE_API_KEY, result.apiKey)
 		}
@@ -285,6 +302,16 @@ class Wizard extends Component {
 					onPreviousClick={this.previousStep.bind(this)}
 					/>
 
+				  {this.state.isErrorDialogOpen && (
+			        <Dialog onClose={() => this.setErrorDialogOpen(false)} width="320px">
+			          <Dialog.CloseButton />
+			          <Heading>Ops, there was an error</Heading>
+			          <Text variant="paragraph">
+			            {this.state.errorMessage}
+			          </Text>
+			          <Button onClick={() => this.setErrorDialogOpen(false)}>Close</Button>
+			        </Dialog>
+			      )}
 			      {this.state.isPublishedDialogOpen && (
 			        <Dialog onClose={() => this.setPublishedDialogOpen(false)} width="320px">
 			          <Dialog.CloseButton />
