@@ -166,33 +166,33 @@ class Ecommerce extends Component {
 		return (
 			<div>
 				<FormField label="Ecommerce Name">
-			      <Input name="name" value={this.state.name} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="name" value={this.state.name} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 			    <FormField label="Ecommerce Description">
-			      <Input name="description" value={this.state.description} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="description" value={this.state.description} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 			    <FormField label="Domain">
-			      <Input name="domain" value={this.state.domain} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="domain" value={this.state.domain} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 			    {this.state.domain && <div className="domainText">
-			    	<Text>{this.state.domain}.airsell.me</Text>
+			    	<Text autoComplete="off" >{this.state.domain}.airsell.me</Text>
 			    </div>}
 
 			    <Label>Theme</Label>
 			    <ThemeSelector theme={this.state.theme} onSelectTheme={this.onSelectTheme.bind(this)}/>
 
 				<FormField label="Home page Title">
-			      <Input name="homeTitle" value={this.state.homeTitle} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="homeTitle" value={this.state.homeTitle} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 			    <FormField label="Home page Description">
-			      <Input name="homeDescription" value={this.state.homeDescription} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="homeDescription" value={this.state.homeDescription} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 
 			    <FormField label="Facebook Page">
-			      <Input name="facebook" value={this.state.facebook} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="facebook" value={this.state.facebook} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 			    <FormField label="Instagram">
-			      <Input name="instagram" value={this.state.instagram} onChange={e => this.setInputValue(e)} />
+			      <Input autoComplete="off" name="instagram" value={this.state.instagram} onChange={e => this.setInputValue(e)} />
 			    </FormField>
 
 				<Footer
