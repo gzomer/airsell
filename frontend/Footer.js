@@ -38,17 +38,18 @@ class Footer extends Component {
 
 	checkPermission() {
 		const permissionGlobalConfig = globalConfig.checkPermissionsForSet()
-		if (this.state.canEdit != permissionGlobalConfig.hasPermission) {
+		if (this.state && this.state.canEdit != permissionGlobalConfig.hasPermission) {
 			this.setState({
 				canEdit: permissionGlobalConfig.hasPermission,
 				cannotEditMessage: permissionGlobalConfig.reasonDisplayString
 			})
 		}
 	}
+
 	render() {
 		return (
 			<div className="footer">
-				{this.state.canEdit && <div>
+				{this.state && this.state.canEdit && <div>
 					{this.props.footerConfig.previous && <Button className="prevButton" onClick={this.props.onPreviousClick}> Previous </Button>}
 					{this.state.publishVisible && <Button
 														disabled={!this.props.validState || this.props.publishing}
@@ -61,7 +62,7 @@ class Footer extends Component {
 					{this.props.footerConfig.next && <Button disabled={!this.props.validState || !this.state.canEdit} className="nextButton" onClick={this.props.onNextClick}> Next </Button>}
 				</div>
 				}
-				{!this.state.canEdit && (<div className="no-permission"><Text>{this.state.cannotEditMessage}</Text></div>)}
+				{this.state && !this.state.canEdit && (<div className="no-permission"><Text>{this.state.cannotEditMessage}</Text></div>)}
 			</div>
 		)
 	}
