@@ -87,17 +87,29 @@ class ConfigurableTable extends Component {
 		if (table == null) {
 			return
 		}
-		globalConfig.setAsync(this.getConfigKeyTable(),table.id)
 
-		for (let i=0;i<this.props.config.fields.length;i++) {
+		let updates = [
+		    {path: [this.getConfigKeyTable()], value: table.id},
+		]
+
+		for (let i=0;i < this.props.config.fields.length; i++) {
 			let item = this.props.config.fields[i]
 			let field = table.getFieldByNameIfExists(item.field)
+
 			if (!field) {
 				continue
 			}
-			globalConfig.setAsync('config-' + this.props.config.table + '-' + item.field + '-Field', field.id)
+			updates.push({
+				path: ['config-' + this.props.config.table + '-' + item.field + '-Field'],
+				value: field.id
+			})
 		}
 
+		this.setState({
+			table: table
+		})
+
+		await globalConfig.setPathsAsync(updates)
 		this.checkValidState(table)
 	}
 
