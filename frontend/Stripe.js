@@ -60,7 +60,7 @@ class Stripe extends Component {
 	render() {
 		return (
 			<div>
-				<ol>
+				<ol className="askKey">
 					<li>
 						<Heading size="xsmall">Go to your Stripe dashboard </Heading>
 						<Text>Click <Link
@@ -74,12 +74,12 @@ class Stripe extends Component {
 					</li>
 					<li>
 						<Heading size="xsmall">Paste your Publishable key here</Heading>
-					    <Input name="stripePublicKey" value={this.state.stripePublicKey} onChange={e => this.setInputValue(e)} />
+					    <Input autoComplete="off" name="stripePublicKey" value={this.state.stripePublicKey} onChange={e => this.setInputValue(e)} />
 					    <Text size="small" textColor="light">Note: the API key will be visible to all collaborators.</Text>
 					</li>
 					<li>
 						<Heading size="xsmall">Paste your Secret key here</Heading>
-					    <Input name="stripeSecretKey" value={this.state.stripeSecretKey} onChange={e => this.setInputValue(e)} />
+					    <Input autoComplete="off" name="stripeSecretKey" value={this.state.stripeSecretKey} onChange={e => this.setInputValue(e)} />
 					</li>
 				</ol>
 				<Footer
