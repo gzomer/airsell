@@ -94,7 +94,32 @@ class ConfigurableTable extends Component {
 
 		for (let i=0;i < this.props.config.fields.length; i++) {
 			let item = this.props.config.fields[i]
-			let field = table.getFieldByNameIfExists(item.field)
+
+			let field = null
+
+			// Try to match Products by name
+			if (this.props.config.table == 'Order Products' && item.field.indexOf('Attribute') != -1) {
+
+				const productsTable = base.getTableByNameIfExists('Products');
+				if (!productsTable) {
+					continue
+				}
+
+				let productAttributeId = globalConfig.get('config-Products-' + item.field + '-Field')
+				if (!productAttributeId) {
+					continue
+				}
+
+				let productField = productsTable.getFieldByIdIfExists(productAttributeId)
+				if (!productField) {
+					continue
+				}
+
+				field = table.getFieldByNameIfExists(productField.name)
+			}
+			else {
+				field = table.getFieldByNameIfExists(item.field)
+			}
 
 			if (!field) {
 				continue
